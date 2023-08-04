@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import TodoItem from "./TodoItem";
+import InputArea from "./InputArea";
 
 function App() {
 
-  const [newItem, setNewItem] = useState("");
+
   const [toDoList, setToDoList] = useState([]);
 
-  function handleClick(){
+  function handleClick(newItem){
     if (newItem !== ""){
     //   const newToDoList = [...toDoList,newItem]
     // setToDoList(newToDoList)
@@ -17,7 +18,7 @@ function App() {
         [...preItems, newItem]
       )
     })
-    setNewItem("")
+
     }
     
   }
@@ -30,21 +31,13 @@ function App() {
     })
   }
 
-  function handleChange(e){
-    const newItem = e.target.value
-    setNewItem(newItem)
-  }
+  
   return (
     <div className="container">
       <div className="heading">
         <h1>To-Do List</h1>
       </div>
-      <div className="form">
-        <input type="text" name="item" value={newItem} onChange={handleChange}/>
-        <button onClick={handleClick}>
-          <span>Add</span>
-        </button>
-      </div>
+      <InputArea onAdd={handleClick}/>
       <div>
         <ul>
         {toDoList.map((item,index) => 
